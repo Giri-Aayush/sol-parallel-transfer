@@ -15,11 +15,11 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 // Configuration
-const DEVNET_RPC = 'https://api.devnet.solana.com';
+const RPC_ENDPOINT = process.env.RPC_ENDPOINT || 'https://api.devnet.solana.com';
 const CSV_FILE = process.env.CSV_FILE || './recipients.csv';
-const BATCH_SIZE = 10; // Max recipients per transaction (Solana limit is ~25, but we use 10 for safety)
-const CONCURRENT_BATCHES = 5; // Number of batches to process in parallel
-const MAX_RETRIES = 3; // Maximum retry attempts per batch
+const BATCH_SIZE = parseInt(process.env.BATCH_SIZE || '10', 10); // Max recipients per transaction (Solana limit is ~25)
+const CONCURRENT_BATCHES = parseInt(process.env.CONCURRENT_BATCHES || '5', 10); // Number of batches to process in parallel
+const MAX_RETRIES = parseInt(process.env.MAX_RETRIES || '3', 10); // Maximum retry attempts per batch
 
 interface Recipient {
   address: string;
@@ -357,9 +357,10 @@ async function main() {
 
     console.log('🔧 Initializing...');
 
-    // Connect to devnet
-    const connection = new Connection(DEVNET_RPC, 'confirmed');
-    console.log('✅ Connected to Solana devnet');
+    // Connect to Solana
+    const connection = new Connection(RPC_ENDPOINT, 'confirmed');
+    const network = RPC_ENDPOINT.includes('devnet') ? 'devnet' : RPC_ENDPOINT.includes('testnet') ? 'testnet' : 'mainnet-beta';
+    console.log(`✅ Connected to Solana ${network}`);
 
     // Load wallet
     const sender = loadWallet();

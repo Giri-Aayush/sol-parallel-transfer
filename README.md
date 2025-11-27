@@ -217,20 +217,71 @@ https://solscan.io/tx/TRANSACTION_SIGNATURE?cluster=devnet
 
 Click these links to verify transfers on the Solana blockchain explorer.
 
-## Network Configuration
+## Configuration Options
 
-**Default:** Devnet (for testing)
+All settings can be configured in your `.env` file. See `.env.example` for the complete list of options.
 
-**For Mainnet:** Edit `distribute.ts` and change:
-```typescript
-const DEVNET_RPC = 'https://api.devnet.solana.com';
+### Network Configuration
+
+Change the network by editing `RPC_ENDPOINT` in your `.env` file:
+
+**Devnet (default - for testing):**
+```bash
+RPC_ENDPOINT=https://api.devnet.solana.com
 ```
-to:
-```typescript
-const MAINNET_RPC = 'https://api.mainnet-beta.solana.com';
+
+**Mainnet (uses real SOL):**
+```bash
+RPC_ENDPOINT=https://api.mainnet-beta.solana.com
+```
+
+**Custom RPC (e.g., QuickNode, Alchemy, Helius):**
+```bash
+RPC_ENDPOINT=https://your-custom-endpoint.com
 ```
 
 **Warning:** Mainnet transactions use real SOL. Test thoroughly on devnet first.
+
+### Performance Configuration
+
+Adjust these settings in your `.env` file to optimize performance:
+
+**BATCH_SIZE** (default: 10)
+- Number of recipients per transaction (range: 1-25)
+- Lower values = more transactions but safer
+- Higher values = fewer transactions but may hit Solana limits
+```bash
+BATCH_SIZE=10
+```
+
+**CONCURRENT_BATCHES** (default: 5)
+- Number of batches to process in parallel (range: 1-10)
+- Higher values = faster execution but may hit RPC rate limits
+- Adjust based on your RPC provider's limits
+```bash
+CONCURRENT_BATCHES=5
+```
+
+**MAX_RETRIES** (default: 3)
+- Number of retry attempts for failed transactions (range: 0-5)
+- Recommended: 3 for reliable delivery
+```bash
+MAX_RETRIES=3
+```
+
+### Distribution Settings
+
+**AMOUNT_PER_RECIPIENT**
+- Default amount to send (can be overridden via command line)
+```bash
+AMOUNT_PER_RECIPIENT=0.01
+```
+
+**CSV_FILE**
+- Path to your recipients file
+```bash
+CSV_FILE=./recipients.csv
+```
 
 ## Troubleshooting
 
@@ -264,16 +315,6 @@ const MAINNET_RPC = 'https://api.mainnet-beta.solana.com';
 - Test with small amounts on devnet before using mainnet
 
 The `.gitignore` file is configured to prevent accidental commits of sensitive files.
-
-## Advanced Configuration
-
-You can modify these constants in `distribute.ts`:
-
-```typescript
-const BATCH_SIZE = 10;              // Recipients per transaction (max 25)
-const CONCURRENT_BATCHES = 5;       // Parallel batches to process
-const MAX_RETRIES = 3;              // Retry attempts for failed batches
-```
 
 ## Support
 
