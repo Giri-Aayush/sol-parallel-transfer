@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.env
+wallet.json
+*.log
+.DS_Store
+test-recipients.csv
