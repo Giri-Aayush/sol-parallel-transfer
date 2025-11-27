@@ -69,12 +69,26 @@ solana balance YOUR_WALLET_ADDRESS --url devnet
 
 Create or edit `recipients.csv` with the wallet addresses you want to send SOL to.
 
-**Format:**
+**Quick Start - Use Sample Files:**
+
+We provide example CSV files in the `examples/` directory:
+- `sample-recipients-small.csv` - 3 addresses (for testing)
+- `sample-recipients-medium.csv` - 10 addresses (single batch)
+- `sample-recipients-large.csv` - 30 addresses (multiple batches)
+
+Copy a sample file to get started:
+```bash
+cp examples/sample-recipients-small.csv recipients.csv
+```
+
+Then edit `recipients.csv` and replace with your actual recipient addresses.
+
+**CSV Format:**
 ```csv
 address
-8YPqwYXZtWKE3J9Z7ZqXxGqxKqYx1a1a1a1a1a1a1a1a
-9ZQrxYXZtWKE3J9Z7ZqXxGqxKqYx2b2b2b2b2b2b2b2b
-AaRsyYXZtWKE3J9Z7ZqXxGqxKqYx3c3c3c3c3c3c3c3c
+7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRu8g6aXJL
+5ZWj7a1f3j1fM5yQ9X8qN2tR3vK6pL9mD4nB8cH7eY2P
+9YpL6xM3nK8jH5gF2dS1aQ4wE7rT0yU3iO9pA6sD5fG8
 ```
 
 **Important:**
@@ -83,15 +97,7 @@ AaRsyYXZtWKE3J9Z7ZqXxGqxKqYx3c3c3c3c3c3c3c3c
 - No spaces or extra characters
 - One address per line
 
-**Example for 5 recipients:**
-```csv
-address
-7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRu8g6aXJL
-5ZWj7a1f3j1fM5yQ9X8qN2tR3vK6pL9mD4nB8cH7eY2P
-9YpL6xM3nK8jH5gF2dS1aQ4wE7rT0yU3iO9pA6sD5fG8
-2LkJ9hG6fD3sA1qW4eR7tY0uI8oP5aS2dF4gH6jK9lZ3
-3XcV8bN5mA2sD7fG0hJ4kL1zQ6wE9rT3yU8iO5pA1sD4
-```
+See the `examples/` directory for more sample files and detailed CSV documentation.
 
 ## Usage
 
